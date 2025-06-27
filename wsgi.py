@@ -1,20 +1,13 @@
 #!/usr/bin/env python3
-"""
-WSGI entry point for production deployment
-"""
-import os
-import logging
-from app import app
+"""WSGI entry point for Gunicorn"""
+from dotenv import load_dotenv
 
-# Production logging configuration
+load_dotenv()
+
+from app import create_app
+
+app = create_app()
+
 if not app.debug:
+    import logging
     logging.basicConfig(level=logging.INFO)
-    handler = logging.StreamHandler()
-    handler.setLevel(logging.INFO)
-    app.logger.addHandler(handler)
-    app.logger.setLevel(logging.INFO)
-    app.logger.info('Application starting in production mode')
-
-if __name__ == "__main__":
-    # For local development
-    app.run(host='0.0.0.0', port=5000, debug=False)

@@ -787,4 +787,5 @@ def chart_view(metric):
                          metric=metric, 
                          metric_info=metric_info[metric],
                          weekly_data=weekly_data,
-                         user=user)
+    user=user)
+
